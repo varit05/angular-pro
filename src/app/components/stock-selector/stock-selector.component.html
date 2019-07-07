@@ -1,0 +1,29 @@
+<div class="mt-3" [formGroup]="parent">
+  <div formGroupName="selector" class="row">
+    <select class="form-control col-5" formControlName="productId">
+      <option value="">Select Product</option>
+      <option
+        *ngFor="let product of products; let i = index"
+        [value]="product.id"
+      >
+        {{ product.name }}
+      </option>
+    </select>
+    <input
+      class="form-control col-2 offset-1"
+      type="number"
+      formControlName="quantity"
+      step="10"
+      min="10"
+      max="1000"
+    />
+    <button
+      type="button"
+      class="col-3 offset-1 btn btn-outline-success"
+      (click)="onAdd()"
+    >
+      Add stock
+    </button>
+  </div>
+  <hr />
+</div>
