@@ -1,0 +1,13 @@
+{
+  "cart": [
+    { "productId": "3", "quantity": 50 },
+    { "productId": "1", "quantity": 30 }
+  ],
+  "products": [
+    { "id": 1, "price": 1599, "name": "Macbook Pro" },
+    { "id": 2, "price": 1299, "name": "Macbook Air" },
+    { "id": 3, "price": 1099, "name": "iPhone X" },
+    { "id": 4, "price": 799, "name": "iPhone 8" },
+    { "id": 5, "price": 399, "name": "Apple watch" }
+  ]
+}
