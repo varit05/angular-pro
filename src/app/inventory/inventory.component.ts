@@ -1,7 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, FormArray } from "@angular/forms";
+import { Observable } from "rxjs";
 
-import { Product } from "./models/product.interface";
+import { Product, Item } from "./models/product.interface";
+
+import { map, catchError } from "rxjs/operators";
+
+import { InventoryService } from "../inventory/services/inventory.service";
 
 @Component({
   selector: "app-inventory",
@@ -11,27 +16,24 @@ import { Product } from "./models/product.interface";
 export class InventoryComponent implements OnInit {
   public inventoryForm: FormGroup;
 
-  public products: Product[] = [
-    { id: 1, price: 1599, name: "Macbook Pro" },
-    { id: 2, price: 1299, name: "Macbook Air" },
-    { id: 3, price: 1099, name: "iPhone X" },
-    { id: 4, price: 799, name: "iPhone 8" },
-    { id: 5, price: 399, name: "Apple watch" }
-  ];
+  public products: Product[];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private inventoryService: InventoryService
+  ) {}
 
   ngOnInit() {
+    const cart = this.inventoryService.getCartItems();
+    const products = this.inventoryService.getProductItems();
+
     this.inventoryForm = this.fb.group({
       store: this.fb.group({
         branch: "",
         code: ""
       }),
       selector: this.createStock({}),
-      stock: this.fb.array([
-        this.createStock({ productId: "3", quantity: 50 }),
-        this.createStock({ productId: "4", quantity: 10 })
-      ])
+      stock: this.fb.array([])
       /*
         Simple way to create FormGroup as below
       */
