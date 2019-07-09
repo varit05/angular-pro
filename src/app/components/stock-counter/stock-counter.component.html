@@ -1,0 +1,11 @@
+<div class="row">
+  <p class="col-8">{{ value }}</p>
+  <div class="col-4">
+    <button type="button" (click)="increment()" [disabled]="value === max">
+      +
+    </button>
+    <button type="button" (click)="decrement()" [disabled]="value === min">
+      -
+    </button>
+  </div>
+</div>

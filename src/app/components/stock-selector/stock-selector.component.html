@@ -9,14 +9,23 @@
         {{ product.name }}
       </option>
     </select>
-    <input
-      class="form-control col-2 offset-1"
+    <!-- <input
+      class="form-control col-1 offset-1"
       type="number"
       formControlName="quantity"
       step="10"
       min="10"
       max="1000"
-    />
+    /> -->
+
+    <app-stock-counter
+      class="form-control col-2 offset-1"
+      [step]="10"
+      [min]="10"
+      [max]="1000"
+      formControlName="quantity"
+    ></app-stock-counter>
+
     <button
       type="button"
       class="col-3 offset-1 btn btn-outline-success"
