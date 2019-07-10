@@ -1,5 +1,13 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, FormArray } from "@angular/forms";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormArray,
+  Validators
+} from "@angular/forms";
+
+import { InventoryValidator } from "./inventory.validator";
 
 import { Product } from "./models/product.interface";
 
@@ -24,8 +32,8 @@ export class InventoryComponent implements OnInit {
   ngOnInit() {
     this.inventoryForm = this.fb.group({
       store: this.fb.group({
-        branch: "",
-        code: ""
+        branch: ["", [Validators.required, InventoryValidator.checkBranch]],
+        code: ["", Validators.required]
       }),
       selector: this.createStock({}),
       stock: this.fb.array([

@@ -3,7 +3,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from "@angular/forms";
 
 const COUNTER_CONTROL_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
-  useFactory: forwardRef(() => StockCounterComponent),
+  useExisting: forwardRef(() => StockCounterComponent),
   multi: true
 };
 
@@ -20,6 +20,8 @@ export class StockCounterComponent implements OnInit, ControlValueAccessor {
 
   private onTouch: Function;
   private onModelChange: Function;
+
+  public focus: boolean;
 
   // NG_VALUE_ACCESSOR FUNCTIONS AND METHODS
   registerOnTouched(fn) {
@@ -38,6 +40,36 @@ export class StockCounterComponent implements OnInit, ControlValueAccessor {
   constructor() {}
 
   ngOnInit() {}
+
+  /*
+   onKeyDown, onFocus, onBlur are added for better a11y.
+   and to handle form events on touch and key press.  
+   */
+
+  onKeyDown(event: KeyboardEvent) {
+    const handlers = {
+      keyDown: () => this.decrement(),
+      keyUp: () => this.increment()
+    };
+
+    if (handlers[event.code]) {
+      handlers[event.code]();
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+
+  onFocus(event: FocusEvent) {
+    this.focus = true;
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  onBlur(event: FocusEvent) {
+    this.focus = false;
+    event.preventDefault();
+    event.stopPropagation();
+  }
 
   increment() {
     if (this.value < this.max) {

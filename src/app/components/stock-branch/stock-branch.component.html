@@ -6,12 +6,27 @@
       placeholder="Branch ID"
       formControlName="branch"
     />
+    <div
+      *ngIf="required('branch')"
+      class="alert alert-danger mt-2 col-8 offset-2"
+    >
+      Branch Id is required
+    </div>
+    <div *ngIf="invalid()" class="alert alert-danger mt-2 col-8 offset-2">
+      Invalid Branch Id
+    </div>
     <input
       class="form-control col-8 offset-2 mt-2"
       type="text"
       placeholder="Manager Code"
       formControlName="code"
     />
+    <div
+      *ngIf="required('code')"
+      class="alert alert-danger mt-2 col-8 offset-2"
+    >
+      Manager Code is required
+    </div>
   </div>
   <hr />
 </div>
