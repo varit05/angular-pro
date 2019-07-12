@@ -23,7 +23,7 @@ export class StockSelectorComponent implements OnInit {
      Reset Form with all the values including angular built in checks 
      i.e dirty, pristine, touched, valid etc... 
      */
-    this.parent.get("stock").reset({
+    this.parent.get("selector").reset({
       productId: "",
       quantity: 10
     });
